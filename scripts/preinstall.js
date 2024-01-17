@@ -19,6 +19,8 @@ const env = {
 	DISCORD_TOKEN: '',
 	ENCRYPTION_KEY: randomBytes(24).toString('hex'),
 	HTTP_EXTERNAL: 'http://127.0.0.1:8169',
+	TRANSCRIPT_URL: 'http://127.0.0.1:8169/tickets',
+	TRANSCRIPT_DIR: '/home/tickets',
 	HTTP_HOST: '0.0.0.0',
 	HTTP_PORT: 8169,
 	HTTP_TRUST_PROXY: false,

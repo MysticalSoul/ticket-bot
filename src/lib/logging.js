@@ -182,7 +182,25 @@ async function logTicketEvent(client, {
 		);
 	}
 
-	return await channel.send({ embeds });
+	/* Inject HTML Transcript into Log Message */
+    const fs = require('fs');
+    var dir = `${process.env.TRANSCRIPT_DIR}/${guild.id}`;
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFile(`${process.env.TRANSCRIPT_DIR}/${guild.id}/${target.id}`, target.html.attachment, function(err) {
+        if(err) {
+            return console.log(err);
+        }
+    }); 
+
+    return await channel.send({ embeds })
+    .then(() => {
+        channel.send({
+            content: `${process.env.TRANSCRIPT_URL}/${guild.id}/${target.id}`,
+            files: [target.html]
+        });
+    });
 }
 
 /**

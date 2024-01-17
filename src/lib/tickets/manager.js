@@ -1209,20 +1209,24 @@ module.exports = class TicketManager {
 			where: { id: ticket.id },
 		});
 
-		if (channel?.deletable) {
-			const member = closedBy ? channel.guild.members.cache.get(closedBy) : null;
-			await channel.delete('Ticket closed' + (member ? ` by ${member.displayName}` : '') + reason ? `: ${reason}` : '');
-		}
-
 		if (closedBy) {
+			/* Create HTML based transcript using module and send it to logger before the channel is deleted. */
+            const discordTranscripts = require('discord-html-transcripts');
+            const attachment = await discordTranscripts.createTranscript(channel);
 			logTicketEvent(this.client, {
 				action: 'close',
 				target: {
 					id: ticket.id,
 					name: `${ticket.category.name} **#${ticket.number}**`,
+					html: attachment
 				},
 				userId: closedBy,
 			});
+		}
+
+		if (channel?.deletable) {
+			const member = closedBy ? channel.guild.members.cache.get(closedBy) : null;
+			await channel.delete('Ticket closed' + (member ? ` by ${member.displayName}` : '') + reason ? `: ${reason}` : '');
 		}
 
 		try {

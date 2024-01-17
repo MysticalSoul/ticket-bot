@@ -31,6 +31,17 @@ const env = {
 		return (!!v && v.startsWith('http')) ||
 			new Error('must be a valid URL without a trailing slash');
 	},
+	TRANSCRIPT_URL: v => {
+		if (v?.endsWith('/')) {
+			v = v.slice(0, -1);
+			process.env.TRANSCRIPT_URL = v;
+		}
+		return (!!v && v.startsWith('http')) ||
+			new Error('must be a valid URL without a trailing slash');
+	},
+    TRANSCRIPT_DIR: v =>
+		!!v ||
+		new Error('is required and is the path where ticket transcripts will be generated'),
 	HTTP_HOST: v =>
 		(!!v && !v.startsWith('http')) ||
 		new Error('is required and must be an address, not a URL'),
