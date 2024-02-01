@@ -22,8 +22,10 @@ const env = {
 	TRANSCRIPT_URL: 'http://127.0.0.1:8169/tickets',
 	TRANSCRIPT_DIR: '/home/tickets',
 	HTTP_HOST: '0.0.0.0',
+	HTTP_INTERNAL: '',
 	HTTP_PORT: 8169,
 	HTTP_TRUST_PROXY: false,
+	INVALIDATE_TOKENS: '',
 	NODE_ENV: 'production', // not bot-specific
 	OVERRIDE_ARCHIVE: '',
 	PUBLIC_BOT: false,

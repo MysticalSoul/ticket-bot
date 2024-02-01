@@ -41,8 +41,10 @@ services:
       TRANSCRIPT_URL: http://127.0.0.1:8169/tickets # change this to your server's external IP (or domain) where tickets will be accessible by link
       TRANSCRIPT_DIR: '/home/tickets' # change this to your server's directory where ticket transcripts will be written. Please use an absolute path with no trailing slash
       HTTP_HOST: 0.0.0.0
+      HTTP_INTERNAL:
       HTTP_PORT: 8169
       HTTP_TRUST_PROXY: "false" # set to true if you're using a reverse proxy
+      INVALIDATE_TOKENS:
       OVERRIDE_ARCHIVE: null
       PUBLIC_BOT: "false"
       PUBLISH_COMMANDS: "false"
